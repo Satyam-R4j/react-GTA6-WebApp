@@ -52,12 +52,16 @@ const App = () => {
         duration: 0.3,
         ease: "power2.out",
       });
+      gsap.to(".bg", {
+        x: xMove * 1.7,
+        duration: 0.3,
+        ease: "power2.out",
+      });
     });
   }, [showContent]);
 
   return (
     <>
-      {/* SVG Overlay */}
       <div className="svg-overlay fixed top-0 left-0 z-[100] w-full h-screen overflow-hidden bg-black">
         <svg
           viewBox="0 0 800 600"
@@ -92,7 +96,6 @@ const App = () => {
         </svg>
       </div>
 
-      {/* Main Content */}
       {showContent && (
         <div className="main w-full">
           <div className="landing w-full h-screen bg-black">
@@ -116,7 +119,7 @@ const App = () => {
                 alt=""
               />
               <img
-                className="absolute bg left-0 right-0 w-full h-full object-cover"
+                className="absolute scale-[1.3] bg left-0 right-0 w-full h-full object-cover"
                 src="/bg.png"
                 alt="Background"
               />
