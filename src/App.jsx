@@ -4,8 +4,9 @@ import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
 
 const App = () => {
-  const [showContent, setShowContent] = useState(false); // Start with SVG overlay
+  const [showContent, setShowContent] = useState(false);
 
+  // Overlay animation
   useGSAP(() => {
     const tl = gsap.timeline();
 
@@ -22,12 +23,37 @@ const App = () => {
       transformOrigin: "50% 50%",
       opacity: 0,
       onComplete: () => {
-        // Remove overlay and show content
         document.querySelector(".svg-overlay").remove();
         setShowContent(true);
       },
     });
   }, []);
+
+  // Mousemove parallax effect
+  useGSAP(() => {
+    if (!showContent) return;
+
+    const main = document.querySelector(".main");
+
+    // Set initial transform to match removed Tailwind class
+    gsap.set(".texts", { xPercent: -50 });
+
+    main?.addEventListener("mousemove", function (e) {
+      const xMove = (e.clientX / window.innerWidth - 0.5) * 40;
+
+      gsap.to(".texts", {
+        x: `${xMove * 0.4}%`,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      gsap.to(".sky", {
+        x: xMove,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    });
+  }, [showContent]);
 
   return (
     <>
@@ -70,9 +96,9 @@ const App = () => {
       {showContent && (
         <div className="main w-full">
           <div className="landing w-full h-screen bg-black">
-            <div className="navbar absolute top-0 left-0 z-[10] w-full py-10 px-10 ">
-              <div className="logo flex  gap-7">
-                <div className="lines flex flex-col  gap-[5px]">
+            <div className="navbar absolute top-0 left-0 z-[10] w-full py-10 px-10">
+              <div className="logo flex gap-7">
+                <div className="lines flex flex-col gap-[5px]">
                   <div className="line w-15 h-2 bg-white"></div>
                   <div className="line w-8 h-2 bg-white"></div>
                   <div className="line w-5 h-2 bg-white"></div>
@@ -85,26 +111,27 @@ const App = () => {
 
             <div className="imagesdiv relative overflow-hidden w-full h-screen">
               <img
-                className="absolute left-0 right-0 w-full h-full object-cover"
+                className="absolute sky scale-[1.2] left-0 right-0 w-full h-full object-cover"
                 src="/sky.png"
                 alt=""
               />
               <img
-                className="absolute left-0 right-0 w-full h-full object-cover"
+                className="absolute bg left-0 right-0 w-full h-full object-cover"
                 src="/bg.png"
                 alt="Background"
               />
-              <div className="text text-white flex flex-col gap-3 absolute   top-20 left-1/2 -translate-x-1/2">
-                <h1 className="text-[12rem] leading-none -ml-40">grand</h1>
-                <h1 className="text-[12rem] leading-none -ml-20">theft</h1>
-                <h1 className="text-[12rem] leading-none -ml-40">auto</h1>
+              <div className=" text-white flex flex-col gap-3 absolute top-10 left-1/2">
+                <h1 className="text-[6rem] texts leading-none -ml-80">grand</h1>
+                <h1 className="text-[6rem] texts leading-none -ml-60">theft</h1>
+                <h1 className="text-[6rem] texts leading-none -ml-80">auto</h1>
               </div>
               <img
-                className="absolute -bottom-[25%] left-1/2 -translate-x-1/2 h-screen scale-[1.4]  "
+                className="absolute -bottom-[25%] left-1/2 -translate-x-1/2 h-screen scale-[1.4]"
                 src="/girlbg.png"
                 alt=""
               />
             </div>
+
             <div className="btmbar text-white absolute bottom-0 left-0 w-full py-15 px-10 bg-gradient-to-t from-black to-transparent">
               <div className="flex gap-4">
                 <i className="text-4xl ri-arrow-down-line"></i>
