@@ -33,6 +33,39 @@ const App = () => {
   useGSAP(() => {
     if (!showContent) return;
 
+    gsap.to(".main", {
+      scale: 1,
+      rotate: 0,
+      delay: -1,
+      duration: 2,
+      ease: "Expo.easeInOut",
+    });
+    gsap.to(".sky", {
+      scale: 1.2,
+      rotate: 0,
+      delay: -0.8,
+      duration: 2,
+      ease: "Expo.easeInOut",
+    });
+
+    gsap.to(".bg", {
+      scale: 1.2,
+      rotate: 0,
+      delay: -1,
+      duration: 2,
+      ease: "Expo.easeInOut",
+    });
+
+    gsap.to(".girl", {
+      scale: 1.4,
+      x: "-50%",
+      bottom: "-25%",
+      rotate: 0,
+      delay: -1,
+      duration: 2,
+      ease: "Expo.easeInOut",
+    });
+
     const main = document.querySelector(".main");
 
     // Set initial transform to match removed Tailwind class
@@ -97,8 +130,8 @@ const App = () => {
       </div>
 
       {showContent && (
-        <div className="main w-full">
-          <div className="landing w-full h-screen bg-black">
+        <div className="main w-full rotate-[-10deg] scale-[1.7]">
+          <div className="landing overflow-hidden relative w-full h-screen bg-black">
             <div className="navbar absolute top-0 left-0 z-[10] w-full py-10 px-10">
               <div className="logo flex gap-7">
                 <div className="lines flex flex-col gap-[5px]">
@@ -114,12 +147,12 @@ const App = () => {
 
             <div className="imagesdiv relative overflow-hidden w-full h-screen">
               <img
-                className="absolute sky scale-[1.2] left-0 right-0 w-full h-full object-cover"
+                className="absolute sky scale-[1.5] rotate-[-20deg] left-0 right-0 w-full h-full object-cover"
                 src="/sky.png"
                 alt=""
               />
               <img
-                className="absolute scale-[1.3] bg left-0 right-0 w-full h-full object-cover"
+                className="absolute scale-[1.8]  rotate-[-3deg] bg left-0 right-0 w-full h-full object-cover"
                 src="/bg.png"
                 alt="Background"
               />
@@ -129,7 +162,7 @@ const App = () => {
                 <h1 className="text-[6rem] texts leading-none -ml-80">auto</h1>
               </div>
               <img
-                className="absolute -bottom-[25%] left-1/2 -translate-x-1/2 h-screen scale-[1.4]"
+                className="absolute girl -bottom-[150%] left-1/2 -translate-x-1/2 h-screen scale-[3] rotate-[-20deg]"
                 src="/girlbg.png"
                 alt=""
               />
@@ -145,6 +178,33 @@ const App = () => {
                 src="./ps5.png"
                 alt=""
               />
+            </div>
+          </div>
+          <div className="w-full h-screen flex items-center justify-center px-10 bg-black">
+            <div className="cntr flex text-white w-full h-[80%] ">
+              <div className="lImg relative   w-1/2 h-full ">
+                <img
+                  className="absolute top-1/2 scale-[0.7] left-1/2 -translate-x-1/2 -translate-y-1/2"
+                  src="./imag.png"
+                  alt=""
+                />
+              </div>
+              <div className="rg  w-[30%]">
+                <h1 className="text-5xl ">Still Running</h1>
+                <h1 className="text-5xl ">not Hunting </h1>
+                <p className="mt-10 text-xl font-[monospace]">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet
+                  repellat omnis vitae repudiandae maiores sequi necessitatibus
+                  quasi sapiente deserunt. Dignissimos quas ipsa numquam.
+                </p>
+                <p className="mt-3 text-xl font-[monospace]">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolorem libero cumque earum veniam?
+                </p>
+                <button className="bg-yellow-500 px-5 py-5 text-4xl text-black mt-10">
+                  Download
+                </button>
+              </div>
             </div>
           </div>
         </div>
